@@ -26,3 +26,19 @@ res = tree.findall('result')
 #dig into the XML tree to find 'latitude and longitude'
 lat = res[0].find('geometry').find('location').find('lat').text
 lng = res[0].find('geometry').find('location').find('lng').text
+
+#Let's format the coordinates to a more appealing, user-friendly form, by converting them to float and adding the corresponding cardinal directions:
+lat = float(lat)
+lng = float(lng)
+lat_c = 'S' if lat < 0 else 'N'
+lng_c = 'W' if lng < 0 else 'E'
+
+#the actual object found by the API
+location = res[0].find('formatted_address').text
+
+#the result
+print("==>", location, "<==")
+print('Latitude: {0:.3f}{1}'.format(abs(lat), lat_c))
+print('Longitude: {0:.3f}{1}'.format(abs(lng), lng_c))
+
+
